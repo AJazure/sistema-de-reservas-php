@@ -16,7 +16,7 @@ define('NOMBRESITIO', 'Sistema de');
 
 //Base de datos
 define('HOST', 'localhost');
-define('DB', 'db_reservas');
+define('DB', 'db_reservas2');
 define('USER', 'root');
 define('PASSWORD', 'admin');
 define('CHARSET', 'utf8mb4');
