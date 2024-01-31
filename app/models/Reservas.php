@@ -51,7 +51,11 @@ es decir que tiene una reserva para una determinada estancia de tiempo de check-
             //debería retornar true si La habitación no tiene reservas para las fechas dadas
             return ($result->countReservas == 0);
         }
+
+        //almacena en la bd una reserva
+        public function storeReserva($data) {
         
+        }
     }
 
 ?>

@@ -34,6 +34,24 @@ class Database{
             print_r('Error en la conexión: ' . $e->getMessage());
         }
 
+    }  
+
+    // Iniciar una transacción
+    public function beginTransaction()
+    {
+        return $this->dbh->beginTransaction();
+    }
+
+    // Confirmar la transacción
+    public function commit()
+    {
+        return $this->dbh->commit();
+    }
+
+    // Deshacer la transacción
+    public function rollBack()
+    {
+        return $this->dbh->rollBack();
     }
 
     //Puede recibir una variable sql

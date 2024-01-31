@@ -28,14 +28,14 @@
                         <label for="checkout" class="form-label">Fecha de salida</label>
                         <input type="date" name="checkout" id="checkout" class="form-control" required min="<?php echo date('Y-m-d'); ?>">
                     </div>
+
                     <div class="col-md-5">
                         <label for="id_hab" class="form-label">Habitación</label>
                         <div class="col-sm-8">
-                            <select id="id_hab" name="id_hab" class="form-control" required>
+                            <select id="id_hab" name="id_hab" class="form-control form-select" aria-label="Default select example" required>
                                 <option disabled selected>
                                     ---- seleccione una habitación ----
                                 </option>
-
                                 <?php foreach ($data['habitaciones'] as $habitacion) : ?>
                                     <option value="<?php echo $habitacion->id_hab; ?>">
                                         Nº <?php echo $habitacion->num_hab . " " . $habitacion->nombre_tipo ?>
@@ -44,6 +44,7 @@
                             </select>
                         </div>
                     </div>
+
                     <button type="submit" class="btn btn-primary mt-2">Buscar</button>
                 </div>
             </form>

@@ -14,30 +14,61 @@ Controller Reserva
             echo "Index de reservas.";
         }
 
-        //Motrará un form para crear una nueva reserva a una habitación
-        /*
-        cuando el user indica unas fechas y habitación, deberá mostrarse si está disponible para esa fecha esa habitación
-        por lo tanto, tiene que ser una func que reciba fechas y num de habitacion para consultar, debe devolver una
-        vista que muestre el estado de esa habitación indicando si puede reservarla o no. Si puede reservarla, entonces
-        debe ejecutar el método create.
-        */
-        //esta func requiere traer del modelo datos de habitación y fechas de reserva disponibles
-        public function create($checkin, $checkout, $num_hab) {
-            //Creo un objeto nuevo para cargarle datos
-            $reservas = $this->reservasModel->getReservas(); //obtengo las fechas en las que está reservada la habitación para poder seleccionar
-            
+        //Recibe 3 parámetros y los pasa a la siguiente vista para continuar con la carga de un form para dar alta
+        public function create($checkin, $checkout, $id_hab) {
 
-            /*
-            //prueba de datos que está almacenando en las var.
-            echo "<pre>";
-            //echo "Habitaciones<br>";
-            //print_r($habitaciones); //no será necesario por lo que getReservas trae un join entre clientes/reservas/habitaciones
-            echo "Reservas<br>";
-            print_r($reservas);
-            echo "</pre>";
-            */
-            //retorno la vista de alta de reserva, envio los datos que se necesitan para el form del alta.
-            //$this->load->view('');
+            //obtengo las habitaciones para el form
+            $habitaciones = $this->habitacionesModel->getHabitaciones();
+
+            foreach ($habitaciones as $habitacion) {
+                
+                if ($habitacion->id_hab == $id_hab) {
+                    $habitacionSeleccionada = $habitacion->num_hab . ' ' . $habitacion->nombre_tipo;
+                }
+
+            }
+            
+            $data = [
+                'titulo'   => 'Realizar Reserva',
+                'checkin'  => $checkin,
+                'checkout' => $checkout,
+                'id_hab'  => $id_hab,
+                'habitacion' => $habitacionSeleccionada
+            ];
+
+            //var_dump($data);
+
+            //indico la vista y le paso los param.
+            $this->loadView('pages/reservar', $data);
+        }
+
+        //Obtiene los datos del form de reservar para luego almacenarlos en la BD y realizar una reserva
+        public function store() {
+            
+            $checkin = $_POST['checkin'];
+            $checkout = $_POST['checkout'];
+            $id_habitacion = $_POST['id_hab'];
+            $nombre_cli = $_POST['nombre_cli'];
+            $apellido_cli = $_POST['apellido_cli'];
+            $dni_cli = $_POST['dni_cli'];
+            $telefono_cli = $_POST['telefono_cli'];
+
+            var_dump($checkin);die();
+
+            $data = [
+                'checkin'  => $checkin,
+                'checkout' => $checkout,
+                'id_hab'  => $id_habitacion,
+                'nombre_cli'  => $nombre_cli,
+                'apellido_cli'  => $apellido_cli,
+                'dni_cli'  => $dni_cli,
+                'telefono_cli'  => $telefono_cli,
+            ];
+
+            $return = $this->reservasModel->storeReserva($data);
+
+            echo $return;
+
         }
         
         // Muestra todas las reservas actuales, ordenadas por fecha de check-in.
@@ -75,9 +106,9 @@ Controller Reserva
             $response = [
                 'disponible' => $disponible,
                 'habitacion' => $id_habitacion,
-                'checkin' => $checkin,
-                'checkout' => $checkout,
-                'ruta' => RUTA_URL
+                'checkin'    => $checkin,
+                'checkout'   => $checkout,
+                'ruta'       => RUTA_URL
             ];
         
             //devuelvo una respuesta JSON que debería agarrar AJAX

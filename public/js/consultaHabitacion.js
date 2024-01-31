@@ -1,4 +1,4 @@
- $('form').submit(function (event) {
+$('form').submit(function (event) {
     //evito que se realice la acción predet del form
     event.preventDefault();
 
