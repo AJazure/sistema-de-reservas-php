@@ -1,14 +1,20 @@
 <?php
-
+    /*
+    Controller Inicio muestra la página inicial
+    */
     class Inicio extends Controller {
         public function __construct() {
+            $this->habitacionModelo = $this->loadModel('Habitacion');
             //echo "Controller Páginas Cargado, este es el controller por defecto";
         }
 
         public function index() {
 
+            $habitaciones = $this->habitacionModelo->getHabitaciones();
+
             $data = [
-                'titulo' => 'Bienvenido al Sistema de Reservas'
+                'titulo' => 'Bienvenido al Sistema de Reservas',
+                'habitaciones' => $habitaciones
             ];
 
             $this->loadView('pages/inicio', $data);

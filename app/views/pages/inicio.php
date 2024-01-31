@@ -14,6 +14,10 @@
     <main>
         <h1>Sistema de Reservas</h1>
 
+        <?php foreach($data['habitaciones'] as $habitacion) : ?>
+            <li><?php echo $habitacion->num_hab . " / " . $habitacion->precio_hab ?></li>
+        <?php endforeach; ?>
+
         <section>
             <form action="<?php echo RUTA_APP; ?>/reservas/findhabitacion" method="POST">
                 <div class="row">

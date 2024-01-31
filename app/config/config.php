@@ -8,11 +8,13 @@ y para la configuración de rutas.
 //echo __FILE__;
 //echo dirname(dirname(__FILE__));
 
-
+//Rutas
 define('RUTA_APP', dirname(dirname(__FILE__))); //ruta de app.
 define('RUTA_URL', 'http://localhost/reservas_sistema/'); //http://localhost/reservas_sistema/ ruta url del sistema.
 define('NOMBRESITIO', 'Sistema de');
 
+
+//Base de datos
 define('HOST', 'localhost');
 define('DB', 'db_reservas');
 define('USER', 'root');
