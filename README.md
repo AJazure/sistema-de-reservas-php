@@ -15,6 +15,29 @@ reservas. Incluye atributos relevantes para cada entidad.
 # Solución
 
 Respecto al modelo de datos realicé el siguiente DER:
+<br>
 [![DER](https://i.postimg.cc/9F4s67Mj/imagen-2024-01-31-204757838.png "DER")](https://i.postimg.cc/9F4s67Mj/imagen-2024-01-31-204757838.png "DER")
 
 Para realizar las tareas decidí que era mejor desarrollarlo aplicando un patrón MVC, ya que permitiría un código más organizado y facilitaría las tareas a realizar.
+
+# Preguntas
+
+**A. Manejo de Datos en Tránsito y Persistencia:**
+
+Explica cómo manejarías la seguridad de los datos en tránsito (durante la comunicación entre el cliente y el servidor) y la persistencia de datos (almacenamiento a largo plazo) en el sistema de reservas. ¿Qué tecnologías y prácticas considerarías?
+
+**respuesta**:
+
+Creo que para asegurar la comunicación entre el cliente y el servidor haría uso del protocolo HTTPS para cifrar la información, entiendo que sería necesario configurar el servidor apache. Respecto a la persistencia de datos creo que la gestión de roles y permisos puede ser de utilidad para evitar accesos no autorizados a información sensible o a acciones (CRUD) que no correspondan con su rol.
+También para la persistencia creo que sería bueno un backup con frecuencia, así como crear índices prácticos, que las tablas estén normalizadas, que se haga uso de procedimientos almacenados o triggers de ser necesario.
+
+---
+
+**B. Seguridad en la Reserva de Habitaciones:**
+
+¿Qué medidas de seguridad implementarías para prevenir problemas como la reserva de una habitación que ya está ocupada? Considera la concurrencia y cómo manejarías situaciones en las que varios clientes intentan reservar la misma habitación simultáneamente.
+
+**respuesta**:
+
+Respecto al transito de datos se podría implementar un bloqueo temporal al iniciar un proceso de reserva, que cuente con un tiempo determinado para así evitar que varios usuarios intenten reservar la misma habitación. El bloqueo debería liberarse automáticamente mediante un job después del tiempo determinado si es que no se completó la reserva.
+Creo que también las transacciones de SQL podrían ser de utilidad para consultas que deban realizarse simultáneamente y que a demás haya un rollback en caso de fallar.
