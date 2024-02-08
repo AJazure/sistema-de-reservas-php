@@ -10,15 +10,15 @@ y para la configuración de rutas.
 
 //Rutas
 define('RUTA_APP', dirname(dirname(__FILE__))); //ruta de app.
-define('RUTA_URL', 'http://localhost/reservas_sistema/'); //http://localhost/reservas_sistema/ ruta url del sistema.
-define('NOMBRESITIO', 'Sistema de');
+define('RUTA_URL', 'http://localhost/???/'); //http://localhost/nombre_proyecto/ ruta url del sistema.
+define('NOMBRESITIO', 'Hola Mundo Web 🥽');
 
 
 //Base de datos
 define('HOST', 'localhost');
-define('DB', 'db_reservas');
+define('DB', 'nombre_db');
 define('USER', 'root');
-define('PASSWORD', 'admin');
+define('PASSWORD', 'password_db');
 define('CHARSET', 'utf8mb4');
 
 ?>
